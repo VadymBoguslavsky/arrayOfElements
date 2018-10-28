@@ -501,6 +501,10 @@
     position: relative;
     -webkit-transition: border-radius .1s linear, background .1s linear, z-index 0s linear;
     -webkit-transition-delay: .8s;
+    -moz-transition: border-radius .1s linear, background .1s linear, z-index 0s linear;
+    -moz-transition-delay: .8s;
+    transition: border-radius .1s linear, background .1s linear, z-index 0s linear;
+    transition-delay: .8s;
   }
 
   #dropdown .content:hover~.parent {
@@ -519,11 +523,17 @@
     width: 230px;
     -webkit-transition: height .5s ease;
     -webkit-transition-delay: .4s;
+    -moz-transition: height .5s ease;
+    -moz-transition-delay: .4s;
+    transition: height .5s ease;
+    transition-delay: .4s;
   }
 
   #dropdown .wrapper-select:active .content {
     height: 123px;
     z-index: 3;
+    -moz-transition-delay: 0s;
+    transition-delay: 0s;
     -webkit-transition-delay: 0s;
   }
 
@@ -531,6 +541,8 @@
     height: 123px;
     z-index: 3;
     -webkit-transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    transition-delay: 0s;
   }
 
   #dropdown .content ul {
