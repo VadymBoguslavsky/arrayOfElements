@@ -1,79 +1,47 @@
-function myFunction() {
-  var x = document.getElementById("Demo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else {
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-    function closeAllSelect(elmnt) {
-      var x, y, i, arrNo = [];
-      x = document.getElementsByClassName("select-items");
-      y = document.getElementsByClassName("select-selected");
-      for (i = 0; i < y.length; i++) {
-        if (elmnt == y[i]) {
-          arrNo.push(i)
-        } else {
-          y[i].classList.remove("select-arrow-active");
-        }
-      }
-      for (i = 0; i < x.length; i++) {
-        if (arrNo.indexOf(i)) {
-          x[i].classList.add("select-hide");
-        }
-      }
+(function () {
+  function addSeperator(nStr) {
+    nStr += '';
+    var x = nStr.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+      x1 = x1.replace(rgx, '1' + '.' + '2');
     }
-    document.addEventListener("click", closeAllSelect);
+    return x1 + x2;
+  }
 
+  function rangeInputChangeEventHandler(e) {
+    var elem = $(".rangeslider span")
+    var rangeGroup = $(this).attr('name'),
+      minBtn = $('.min'),
+      maxBtn = $('.max'),
+      range_min = $('.range_min'),
+      range_max = $('.range_max'),
+      minVal = parseInt($(minBtn).val()),
+      maxVal = parseInt($(maxBtn).val()),
+      origin = $(this).context.className;
+    if (origin === 'min' && minVal > maxVal - 5) {
+      $(minBtn).val(maxVal - 5);
+    }
+    var minVal = parseInt($(minBtn).val());
+    $(range_min).html(addSeperator(minVal * 1));
+    $('#range__from').text(addSeperator(minVal * 1))
+    if (origin === 'max' && maxVal - 5 < minVal) {
+      $(maxBtn).val(1 + minVal);
+    }
+    var maxVal = parseInt($(maxBtn).val());
+    $(range_max).html(addSeperator(maxVal * 1));
+    $('#range__to').text(addSeperator(maxVal * 1))
+    elem.css("display", "block");;
+  }
 
-
-    (function () {
-
-      function addSeperator(nStr) {
-        nStr += '';
-        var x = nStr.split('.');
-        var x1 = x[0];
-        var x2 = x.length > 1 ? '.' + x[1] : '';
-        var rgx = /(\d+)(\d{3})/;
-        while (rgx.test(x1)) {
-          x1 = x1.replace(rgx, '1' + '.' + '2');
-        }
-        return x1 + x2;
-      }
-
-      function rangeInputChangeEventHandler(e) {
-        var elem = $(".rangeslider span")
-        var rangeGroup = $(this).attr('name'),
-          minBtn = $('.min'),
-          maxBtn = $('.max'),
-          range_min = $('.range_min'),
-          range_max = $('.range_max'),
-          minVal = parseInt($(minBtn).val()),
-          maxVal = parseInt($(maxBtn).val()),
-          origin = $(this).context.className;
-
-        if (origin === 'min' && minVal > maxVal - 5) {
-          $(minBtn).val(maxVal - 5);
-        }
-        var minVal = parseInt($(minBtn).val());
-        $(range_min).html(addSeperator(minVal * 1));
-        $('#range__from').text(addSeperator(minVal * 1))
-        if (origin === 'max' && maxVal - 5 < minVal) {
-          $(maxBtn).val(1 + minVal);
-        }
-        var maxVal = parseInt($(maxBtn).val());
-        $(range_max).html(addSeperator(maxVal * 1));
-        $('#range__to').text(addSeperator(maxVal * 1))
-        elem.css("display", "block");;
-      }
-
-      $('.rangeslider input[type="range"]').on('input', rangeInputChangeEventHandler);
-    })();
+  $('.rangeslider input[type="range"]').on('input', rangeInputChangeEventHandler);
+})();
 
 $(function () {
   $('.w300').select2();
 });
-
 
 $(function drawSector() {
   var activeBorder = $("#activeBorder");
@@ -138,7 +106,7 @@ $(function drawSector() {
   showTab(currentTab);
 }());
 
-(function(){
+(function () {
   var header = document.getElementById("buttons");
   var btns = header.getElementsByClassName("btn-tab");
   for (var i = 0; i < btns.length; i++) {
